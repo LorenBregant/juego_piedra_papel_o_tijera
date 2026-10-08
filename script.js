@@ -48,3 +48,31 @@ function terminaPartida(puntJug, puntBot) {
     }
 
 }
+
+function jugar(eleccionUsuario) {
+    let eleccionComputadora = eleccionBot();
+    let ganador = determinarGanador(eleccionUsuario, eleccionComputadora);
+    actualizarPuntaje(ganador);
+    let resultado = terminaPartida(puntajeJugador, puntajeComputadora);
+    return {
+            eleccionUsuario,
+            eleccionComputadora,
+            ganador,
+            puntajeJugador,
+            puntajeComputadora,
+            resultado
+        }
+}
+
+function controlarPartida() {
+    let eleccionUsuario = "tijera";
+    let resultadoPartida = jugar(eleccionUsuario);
+    if (resultadoPartida.resultado == "Continuar Partida") {
+        return controlarPartida();
+    }
+    else {
+        return resultadoPartida;
+    }
+}
+
+console.log(controlarPartida());
