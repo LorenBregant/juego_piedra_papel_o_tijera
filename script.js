@@ -26,6 +26,7 @@ function determinarGanador(eleccionUsuario, eleccionBot) {
 
 let puntajeJugador = 0;
 let puntajeComputadora = 0;
+let partidaTerminada = false;
 
 function actualizarPuntaje(ganador) {
     if (ganador == "usuario") {
@@ -50,18 +51,26 @@ function terminaPartida(puntJug, puntBot) {
 }
 
 function jugar(eleccionUsuario) {
+    if (partidaTerminada) {
+        return {
+            resultado: "Partida Terminada"
+        };
+    }
     let eleccionComputadora = eleccionBot();
     let ganador = determinarGanador(eleccionUsuario, eleccionComputadora);
     actualizarPuntaje(ganador);
     let resultado = terminaPartida(puntajeJugador, puntajeComputadora);
+    if (resultado == "Ganador Jugador" || resultado == "Ganador Computadora") {
+        partidaTerminada = true;
+    }
     return {
-            eleccionUsuario,
-            eleccionComputadora,
-            ganador,
-            puntajeJugador,
-            puntajeComputadora,
-            resultado
-        }
+        eleccionUsuario,
+        eleccionComputadora,
+        ganador,
+        puntajeJugador,
+        puntajeComputadora,
+        resultado
+    };
 }
 
 function controlarPartida() {
@@ -75,4 +84,8 @@ function controlarPartida() {
     }
 }
 
-console.log(controlarPartida());
+function reiniciarPartida() {
+    puntajeJugador = 0;
+    puntajeComputadora = 0;
+    partidaTerminada = false;
+}
