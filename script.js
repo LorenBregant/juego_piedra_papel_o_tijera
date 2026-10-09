@@ -1,8 +1,10 @@
+// Elige aleatoriamente una opción para la computadora.
 function eleccionBot() {
     const opciones = ["piedra", "papel", "tijera"];
     return opciones[Math.floor(Math.random() * opciones.length)]
 }
 
+// Determina quién gana la ronda según las elecciones del usuario y la computadora.
 function determinarGanador(eleccionUsuario, eleccionBot) {
     let ganador;
     if (eleccionUsuario == eleccionBot) {
@@ -24,10 +26,12 @@ function determinarGanador(eleccionUsuario, eleccionBot) {
 
 }
 
+// Guarda los puntajes actuales y el estado de la partida.
 let puntajeJugador = 0;
 let puntajeComputadora = 0;
 let partidaTerminada = false;
 
+// Aumenta un punto al ganador de la ronda; si hay empate, no modifica el puntaje.
 function actualizarPuntaje(ganador) {
     if (ganador == "usuario") {
         puntajeJugador++
@@ -37,6 +41,7 @@ function actualizarPuntaje(ganador) {
     }
 }
 
+// Comprueba si algún participante llegó a 5 puntos y devuelve el estado de la partida.
 function terminaPartida(puntJug, puntBot) {
     if (puntJug == 5) {
         return "Ganador Jugador";
@@ -50,6 +55,7 @@ function terminaPartida(puntJug, puntBot) {
 
 }
 
+// Ejecuta una ronda, actualiza el puntaje, comprueba si terminó la partida y devuelve sus resultados.
 function jugar(eleccionUsuario) {
     if (partidaTerminada) {
         return {
@@ -73,6 +79,7 @@ function jugar(eleccionUsuario) {
     };
 }
 
+// Juega rondas automáticamente hasta que el usuario o la computadora llega a 5 puntos.
 function controlarPartida() {
     let eleccionUsuario = "tijera";
     let resultadoPartida = jugar(eleccionUsuario);
@@ -84,6 +91,7 @@ function controlarPartida() {
     }
 }
 
+// Reinicia los puntajes y habilita una nueva partida.
 function reiniciarPartida() {
     puntajeJugador = 0;
     puntajeComputadora = 0;
