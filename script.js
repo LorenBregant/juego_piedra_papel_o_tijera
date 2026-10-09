@@ -97,3 +97,23 @@ function reiniciarPartida() {
     puntajeComputadora = 0;
     partidaTerminada = false;
 }
+
+// Crea el menú inicial con título, descripción y botón de inicio.
+function crearMenuInicial() {
+    const aplicacion = document.getElementById("app");
+
+    const titulo = document.createElement("h1");
+    titulo.textContent = "Piedra, Papel o Tijera";
+
+    const descripcion = document.createElement("p");
+    descripcion.textContent = "Elige tu mano y compite contra la computadora. ¡El primero en llegar a 5 puntos gana!";
+
+    const botonIniciar = document.createElement("button");
+    botonIniciar.textContent = "Iniciar Juego";
+
+    aplicacion.appendChild(titulo);
+    aplicacion.appendChild(descripcion);
+    aplicacion.appendChild(botonIniciar);
+}
+
+crearMenuInicial();
