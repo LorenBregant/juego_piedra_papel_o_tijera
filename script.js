@@ -151,14 +151,23 @@ function crearPantallaJuego() {
     // Botón piedra.
     const btnPiedra = document.createElement("button");
     btnPiedra.textContent = "Piedra";
+    btnPiedra.addEventListener("click", function () {
+        procesarJugada("piedra");
+    });
 
     // Botón papel.
     const btnPapel = document.createElement("button");
     btnPapel.textContent = "Papel";
+    btnPapel.addEventListener("click", function () {
+        procesarJugada("papel");
+    });
 
     // Botón tijera.
     const btnTijera = document.createElement("button");
     btnTijera.textContent = "Tijera";
+    btnTijera.addEventListener("click", function () {
+        procesarJugada("tijera");
+    });
 
     // Resultado de cada ronda.
     const resultadoRonda = document.createElement("p");
@@ -175,6 +184,33 @@ function crearPantallaJuego() {
     aplicacion.appendChild(descripcion);
     aplicacion.appendChild(botones);
     aplicacion.appendChild(resultadoRonda);
+}
+
+function procesarJugada(eleccionUsuario) {
+    const resultado = jugar(eleccionUsuario);
+
+    if (resultado.resultado == "Partida Terminada") {
+        return;
+    }
+
+    const marcadorUsuario = document.getElementById("marcadorUsuario");
+    const marcadorComputadora = document.getElementById("marcadorComputadora");
+    const resultadoRonda = document.getElementById("resultadoRonda");
+
+    marcadorUsuario.textContent = "Jugador: " + resultado.puntajeJugador;
+    marcadorComputadora.textContent = "Computadora: " + resultado.puntajeComputadora;
+
+    if (resultado.ganador == "empate") {
+        resultadoRonda.textContent = "Empate! Ambos eligieron " + resultado.eleccionUsuario;
+    }
+    else if (resultado.ganador == "usuario") {
+        resultadoRonda.textContent = "Ganaste! Elegiste " + resultado.eleccionUsuario + " y la computadora eligió " + 
+        resultado.eleccionComputadora;
+    }
+    else {
+        resultadoRonda.textContent = "Perdiste! Elegiste " + resultado.eleccionUsuario + " y la computadora eligió " + 
+        resultado.eleccionComputadora;
+    }
 }
 
 crearMenuInicial();
