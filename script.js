@@ -80,16 +80,16 @@ function jugar(eleccionUsuario) {
 }
 
 // Juega rondas automáticamente hasta que el usuario o la computadora llega a 5 puntos.
-function controlarPartida() {
-    let eleccionUsuario = "tijera";
-    let resultadoPartida = jugar(eleccionUsuario);
-    if (resultadoPartida.resultado == "Continuar Partida") {
-        return controlarPartida();
-    }
-    else {
-        return resultadoPartida;
-    }
-}
+// function controlarPartida() {
+//     let eleccionUsuario = "tijera";
+//     let resultadoPartida = jugar(eleccionUsuario);
+//     if (resultadoPartida.resultado == "Continuar Partida") {
+//         return controlarPartida();
+//     }
+//     else {
+//         return resultadoPartida;
+//     }
+// }
 
 // Reinicia los puntajes y habilita una nueva partida.
 function reiniciarPartida() {
@@ -105,15 +105,76 @@ function crearMenuInicial() {
     const titulo = document.createElement("h1");
     titulo.textContent = "Piedra, Papel o Tijera";
 
+    // Descripción para el usuario.
     const descripcion = document.createElement("p");
     descripcion.textContent = "Elige tu mano y compite contra la computadora. ¡El primero en llegar a 5 puntos gana!";
 
     const botonIniciar = document.createElement("button");
     botonIniciar.textContent = "Iniciar Juego";
 
+    botonIniciar.addEventListener("click", function () {
+        const aplicacion = document.getElementById("app");
+        aplicacion.replaceChildren();
+
+        crearPantallaJuego();
+    })
+
     aplicacion.appendChild(titulo);
     aplicacion.appendChild(descripcion);
     aplicacion.appendChild(botonIniciar);
+}
+
+function crearPantallaJuego() {
+    const aplicacion = document.getElementById("app");
+
+    const titulo = document.createElement("h1");
+    titulo.textContent = "Juega!";
+
+    // Puntajes de usuario
+    const marcadorUsuario = document.createElement("p");
+    marcadorUsuario.id = "marcadorUsuario";
+    marcadorUsuario.textContent = "Jugador: 0";
+
+    // Puntajes de computadora
+    const marcadorComputadora = document.createElement("p");
+    marcadorComputadora.id = "marcadorComputadora";
+    marcadorComputadora.textContent = "Computadora: 0";
+
+    // Instrucción para el usuario.
+    const descripcion = document.createElement("p");
+    descripcion.textContent = "Elige tu opción:";
+
+    // Todos los botones.
+    const botones = document.createElement("div");
+    botones.id = "botones";
+
+    // Botón piedra.
+    const btnPiedra = document.createElement("button");
+    btnPiedra.textContent = "Piedra";
+
+    // Botón papel.
+    const btnPapel = document.createElement("button");
+    btnPapel.textContent = "Papel";
+
+    // Botón tijera.
+    const btnTijera = document.createElement("button");
+    btnTijera.textContent = "Tijera";
+
+    // Resultado de cada ronda.
+    const resultadoRonda = document.createElement("p");
+    resultadoRonda.id = "resultadoRonda";
+    resultadoRonda.textContent = "Espera tu elección...";
+
+    botones.appendChild(btnPiedra);
+    botones.appendChild(btnPapel);
+    botones.appendChild(btnTijera);
+
+    aplicacion.appendChild(titulo);
+    aplicacion.appendChild(marcadorUsuario);
+    aplicacion.appendChild(marcadorComputadora);
+    aplicacion.appendChild(descripcion);
+    aplicacion.appendChild(botones);
+    aplicacion.appendChild(resultadoRonda);
 }
 
 crearMenuInicial();
