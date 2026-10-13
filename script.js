@@ -174,6 +174,10 @@ function crearPantallaJuego() {
     resultadoRonda.id = "resultadoRonda";
     resultadoRonda.textContent = "Espera tu elección...";
 
+    // Resultado fianl.
+    const resultadoFinal = document.createElement("p");
+    resultadoFinal.id = "resultadoFinal";
+
     botones.appendChild(btnPiedra);
     botones.appendChild(btnPapel);
     botones.appendChild(btnTijera);
@@ -184,6 +188,7 @@ function crearPantallaJuego() {
     aplicacion.appendChild(descripcion);
     aplicacion.appendChild(botones);
     aplicacion.appendChild(resultadoRonda);
+    aplicacion.appendChild(resultadoFinal);
 }
 
 function procesarJugada(eleccionUsuario) {
@@ -204,13 +209,24 @@ function procesarJugada(eleccionUsuario) {
         resultadoRonda.textContent = "Empate! Ambos eligieron " + resultado.eleccionUsuario;
     }
     else if (resultado.ganador == "usuario") {
-        resultadoRonda.textContent = "Ganaste! Elegiste " + resultado.eleccionUsuario + " y la computadora eligió " + 
-        resultado.eleccionComputadora;
+        resultadoRonda.textContent = "Ganaste! Elegiste " + resultado.eleccionUsuario + " y la computadora eligió " +
+            resultado.eleccionComputadora;
     }
     else {
-        resultadoRonda.textContent = "Perdiste! Elegiste " + resultado.eleccionUsuario + " y la computadora eligió " + 
-        resultado.eleccionComputadora;
+        resultadoRonda.textContent = "Perdiste! Elegiste " + resultado.eleccionUsuario + " y la computadora eligió " +
+            resultado.eleccionComputadora;
     }
+
+    if (resultado.resultado == "Ganador Jugador" || resultado.resultado == "Ganador Computadora") {
+        const resultadoFinal = document.getElementById("resultadoFinal");
+
+        if (resultado.resultado == "Ganador Jugador") {
+            resultadoFinal.textContent = "Ganaste la partida.";
+        }
+        else {
+            resultadoFinal.textContent = "La computadora ganó la partida.";
+        }
+    };
 }
 
 crearMenuInicial();
