@@ -150,6 +150,7 @@ function crearPantallaJuego() {
 
     // Botón piedra.
     const btnPiedra = document.createElement("button");
+    btnPiedra.id = "btnPiedra";
     btnPiedra.textContent = "Piedra";
     btnPiedra.addEventListener("click", function () {
         procesarJugada("piedra");
@@ -157,6 +158,7 @@ function crearPantallaJuego() {
 
     // Botón papel.
     const btnPapel = document.createElement("button");
+    btnPapel.id = "btnPapel";
     btnPapel.textContent = "Papel";
     btnPapel.addEventListener("click", function () {
         procesarJugada("papel");
@@ -164,6 +166,7 @@ function crearPantallaJuego() {
 
     // Botón tijera.
     const btnTijera = document.createElement("button");
+    btnTijera.id = "btnTijera";
     btnTijera.textContent = "Tijera";
     btnTijera.addEventListener("click", function () {
         procesarJugada("tijera");
@@ -198,6 +201,7 @@ function procesarJugada(eleccionUsuario) {
         return;
     }
 
+    const aplicacion = document.getElementById("app");
     const marcadorUsuario = document.getElementById("marcadorUsuario");
     const marcadorComputadora = document.getElementById("marcadorComputadora");
     const resultadoRonda = document.getElementById("resultadoRonda");
@@ -220,12 +224,26 @@ function procesarJugada(eleccionUsuario) {
     if (resultado.resultado == "Ganador Jugador" || resultado.resultado == "Ganador Computadora") {
         const resultadoFinal = document.getElementById("resultadoFinal");
 
+        document.getElementById("btnPiedra").disabled = true;
+        document.getElementById("btnPapel").disabled = true;
+        document.getElementById("btnTijera").disabled = true;
+
         if (resultado.resultado == "Ganador Jugador") {
             resultadoFinal.textContent = "Ganaste la partida.";
         }
         else {
             resultadoFinal.textContent = "La computadora ganó la partida.";
         }
+
+        const btnReiniciar = document.createElement("button");
+        btnReiniciar.textContent = "Reiniciar Partida";
+        btnReiniciar.addEventListener("click", function () {
+            reiniciarPartida();
+            aplicacion.replaceChildren();
+            crearPantallaJuego();
+        });
+
+        aplicacion.appendChild(btnReiniciar);
     };
 }
 
