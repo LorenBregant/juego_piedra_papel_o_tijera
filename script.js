@@ -151,33 +151,61 @@ function crearPantallaJuego() {
     // Botón piedra.
     const btnPiedra = document.createElement("button");
     btnPiedra.id = "btnPiedra";
-    btnPiedra.textContent = "Piedra";
     btnPiedra.addEventListener("click", function () {
         procesarJugada("piedra");
     });
+    const imagenPiedra = document.createElement("img");
+    imagenPiedra.src = "img/piedra.png";
+    imagenPiedra.alt = "Piedra";
+
+    btnPiedra.appendChild(imagenPiedra);
 
     // Botón papel.
     const btnPapel = document.createElement("button");
     btnPapel.id = "btnPapel";
-    btnPapel.textContent = "Papel";
     btnPapel.addEventListener("click", function () {
         procesarJugada("papel");
     });
+    const imagenPapel = document.createElement("img");
+    imagenPapel.src = "img/papel.png";
+    imagenPapel.alt = "Papel";
+
+    btnPapel.appendChild(imagenPapel);
 
     // Botón tijera.
     const btnTijera = document.createElement("button");
     btnTijera.id = "btnTijera";
-    btnTijera.textContent = "Tijera";
     btnTijera.addEventListener("click", function () {
         procesarJugada("tijera");
     });
+    const imagenTijera = document.createElement("img");
+    imagenTijera.src = "img/tijera.png";
+    imagenTijera.alt = "Tijera";
+
+    btnTijera.appendChild(imagenTijera);
 
     // Resultado de cada ronda.
     const resultadoRonda = document.createElement("p");
     resultadoRonda.id = "resultadoRonda";
     resultadoRonda.textContent = "Espera tu elección...";
 
-    // Resultado fianl.
+    const imgUsuario = document.createElement("img");
+    imgUsuario.id = "imgUsuario";
+    imgUsuario.alt = "Elección del jugador";
+    imgUsuario.hidden = true;
+
+    const imgComputadora = document.createElement("img");
+    imgComputadora.id = "imgComputadora";
+    imgComputadora.alt = "Elección de la computadora";
+    imgComputadora.hidden = true;
+
+    const zonaElecciones = document.createElement("div");
+    zonaElecciones.id = "zonaElecciones";
+
+    zonaElecciones.appendChild(imgUsuario);
+    zonaElecciones.appendChild(imgComputadora);
+
+    // Resultado final.
     const resultadoFinal = document.createElement("p");
     resultadoFinal.id = "resultadoFinal";
 
@@ -192,6 +220,7 @@ function crearPantallaJuego() {
     aplicacion.appendChild(botones);
     aplicacion.appendChild(resultadoRonda);
     aplicacion.appendChild(resultadoFinal);
+    aplicacion.appendChild(zonaElecciones);
 }
 
 function procesarJugada(eleccionUsuario) {
@@ -200,6 +229,14 @@ function procesarJugada(eleccionUsuario) {
     if (resultado.resultado == "Partida Terminada") {
         return;
     }
+
+    const imgUsuario = document.getElementById("imgUsuario");
+    const imgComputadora = document.getElementById("imgComputadora");
+
+    imgUsuario.src = "img/" + resultado.eleccionUsuario + ".png";
+    imgUsuario.hidden = false;
+    imgComputadora.src = "img/" + resultado.eleccionComputadora + ".png";
+    imgComputadora.hidden = false;
 
     const aplicacion = document.getElementById("app");
     const marcadorUsuario = document.getElementById("marcadorUsuario");
