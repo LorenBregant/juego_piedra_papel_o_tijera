@@ -140,6 +140,14 @@ function crearPantallaJuego() {
     marcadorComputadora.id = "marcadorComputadora";
     marcadorComputadora.textContent = "Computadora: 0";
 
+    // Contenedor de los marcadores.
+    const marcador = document.createElement("div");
+    marcador.id = "marcador";
+
+    // Agrupa los puntajes de ambos participantes.
+    marcador.appendChild(marcadorUsuario);
+    marcador.appendChild(marcadorComputadora);
+
     // Instrucción para el usuario.
     const descripcion = document.createElement("p");
     descripcion.textContent = "Elige tu opción:";
@@ -214,8 +222,7 @@ function crearPantallaJuego() {
     botones.appendChild(btnTijera);
 
     aplicacion.appendChild(titulo);
-    aplicacion.appendChild(marcadorUsuario);
-    aplicacion.appendChild(marcadorComputadora);
+    aplicacion.appendChild(marcador);
     aplicacion.appendChild(descripcion);
     aplicacion.appendChild(botones);
     aplicacion.appendChild(resultadoRonda);

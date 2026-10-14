@@ -60,7 +60,7 @@ button:hover {
     border-radius: 16px;
     cursor: pointer;
     transition: transform 0.2s, border-color 0.2s,
-                background-color 0.2s;
+        background-color 0.2s;
 }
 
 #botones img {
@@ -113,6 +113,26 @@ button:hover {
     font-weight: bold;
 }
 
+#marcador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 450px;
+}
+
+#marcador p {
+    flex: 1;
+    margin: 0;
+    padding: 16px 12px;
+    background-color: #1b2537;
+    border: 1px solid #34445e;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
 @media (max-width: 600px) {
     h1 {
         font-size: 2rem;
@@ -137,4 +157,15 @@ button:hover {
         height: 125px;
         padding: 8px;
     }
-};
+}
+
+@media (max-width: 400px) {
+    #marcador {
+        gap: 10px;
+    }
+
+    #marcador p {
+        padding: 12px 6px;
+        font-size: 0.95rem;
+    }
+}
