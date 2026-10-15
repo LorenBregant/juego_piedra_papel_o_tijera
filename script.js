@@ -79,18 +79,6 @@ function jugar(eleccionUsuario) {
     };
 }
 
-// Juega rondas automáticamente hasta que el usuario o la computadora llega a 5 puntos.
-// function controlarPartida() {
-//     let eleccionUsuario = "tijera";
-//     let resultadoPartida = jugar(eleccionUsuario);
-//     if (resultadoPartida.resultado == "Continuar Partida") {
-//         return controlarPartida();
-//     }
-//     else {
-//         return resultadoPartida;
-//     }
-// }
-
 // Reinicia los puntajes y habilita una nueva partida.
 function reiniciarPartida() {
     puntajeJugador = 0;
@@ -124,6 +112,7 @@ function crearMenuInicial() {
     aplicacion.appendChild(botonIniciar);
 }
 
+// Crea la pantalla del juego.
 function crearPantallaJuego() {
     const aplicacion = document.getElementById("app");
 
@@ -156,36 +145,39 @@ function crearPantallaJuego() {
     const botones = document.createElement("div");
     botones.id = "botones";
 
-    // Botón piedra.
+    // Botón e imagen de piedra.
     const btnPiedra = document.createElement("button");
     btnPiedra.id = "btnPiedra";
     btnPiedra.addEventListener("click", function () {
         procesarJugada("piedra");
     });
+
     const imagenPiedra = document.createElement("img");
     imagenPiedra.src = "img/piedra.png";
     imagenPiedra.alt = "Piedra";
 
     btnPiedra.appendChild(imagenPiedra);
 
-    // Botón papel.
+    // Botón e imagen de papel.
     const btnPapel = document.createElement("button");
     btnPapel.id = "btnPapel";
     btnPapel.addEventListener("click", function () {
         procesarJugada("papel");
     });
+
     const imagenPapel = document.createElement("img");
     imagenPapel.src = "img/papel.png";
     imagenPapel.alt = "Papel";
 
     btnPapel.appendChild(imagenPapel);
 
-    // Botón tijera.
+    // Botón e imagen de tijera.
     const btnTijera = document.createElement("button");
     btnTijera.id = "btnTijera";
     btnTijera.addEventListener("click", function () {
         procesarJugada("tijera");
     });
+
     const imagenTijera = document.createElement("img");
     imagenTijera.src = "img/tijera.png";
     imagenTijera.alt = "Tijera";
@@ -197,6 +189,7 @@ function crearPantallaJuego() {
     resultadoRonda.id = "resultadoRonda";
     resultadoRonda.textContent = "Espera tu elección...";
 
+    // Imagenes de las elecciones.
     const imgUsuario = document.createElement("img");
     imgUsuario.id = "imgUsuario";
     imgUsuario.alt = "Elección del jugador";
@@ -207,6 +200,7 @@ function crearPantallaJuego() {
     imgComputadora.alt = "Elección de la computadora";
     imgComputadora.hidden = true;
 
+    // Contenedor de las elecciones.
     const zonaElecciones = document.createElement("div");
     zonaElecciones.id = "zonaElecciones";
 
@@ -230,6 +224,7 @@ function crearPantallaJuego() {
     aplicacion.appendChild(zonaElecciones);
 }
 
+// Actualiza la pantalla con los resltados.
 function procesarJugada(eleccionUsuario) {
     const resultado = jugar(eleccionUsuario);
 
@@ -237,6 +232,7 @@ function procesarJugada(eleccionUsuario) {
         return;
     }
 
+    // Actualiza las imágenes de las elecciones.
     const imgUsuario = document.getElementById("imgUsuario");
     const imgComputadora = document.getElementById("imgComputadora");
 
@@ -250,9 +246,11 @@ function procesarJugada(eleccionUsuario) {
     const marcadorComputadora = document.getElementById("marcadorComputadora");
     const resultadoRonda = document.getElementById("resultadoRonda");
 
+    // Actualiza los puntajes.
     marcadorUsuario.textContent = "Jugador: " + resultado.puntajeJugador;
     marcadorComputadora.textContent = "Computadora: " + resultado.puntajeComputadora;
 
+    // Muestra quien ganó la ronda.
     if (resultado.ganador == "empate") {
         resultadoRonda.textContent = "Empate! Ambos eligieron " + resultado.eleccionUsuario;
     }
@@ -265,6 +263,7 @@ function procesarJugada(eleccionUsuario) {
             resultado.eleccionComputadora;
     }
 
+    // Finaliza la partida si alguien llega a 5 puntos.
     if (resultado.resultado == "Ganador Jugador" || resultado.resultado == "Ganador Computadora") {
         const resultadoFinal = document.getElementById("resultadoFinal");
 
@@ -279,6 +278,7 @@ function procesarJugada(eleccionUsuario) {
             resultadoFinal.textContent = "La computadora ganó la partida.";
         }
 
+        // Crea un botón para reiniciar la partida.
         const btnReiniciar = document.createElement("button");
         btnReiniciar.textContent = "Reiniciar Partida";
         btnReiniciar.addEventListener("click", function () {
